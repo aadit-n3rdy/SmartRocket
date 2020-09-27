@@ -5,10 +5,19 @@ Matrix::Matrix(unsigned int rows, unsigned int cols, double val)
     mat = vector<vector<double>>(rows, vector<double>(cols, val));
 }
 
-vector<double> Matrix::operator[](int row)
+Matrix::Matrix(unsigned int rows, unsigned int cols, double* vals) {
+    mat = vector<vector<double>>(rows, vector<double>(cols, 0));
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            mat[i][j] = vals[i*cols + j];
+        }
+    }
+}
+
+double* Matrix::operator()(unsigned int row, unsigned int col)
 {
-    if (row < rows()) {
-        return mat[row];
+    if (row < rows() && col < cols()) {
+        return &mat[row][col];
     }
     else {
         throw MatrixSizeException();
@@ -20,10 +29,10 @@ Matrix Matrix::operator+(Matrix rhs)
     if (rhs.cols() != cols() || rhs.rows() != rows()) {
         throw MatrixSizeException();
     }
-    Matrix returnMatrix(rows(), cols(), 0);
+    Matrix returnMatrix(rows(), cols(), (double)0);
     for (int i = 0; i < rows(); i++) {
         for (int j = 0; j < cols(); j++) {
-            returnMatrix[i][j] = mat[i][j] + rhs[i][j];
+            *returnMatrix(i, j) = mat[i][j] + *rhs(i, j);
         }
     }    
     return returnMatrix;
@@ -34,10 +43,10 @@ Matrix Matrix::operator-(Matrix rhs)
     if (rhs.cols() != cols() || rhs.rows() != rows()) {
         throw MatrixSizeException();
     }
-    Matrix returnMatrix(rows(), cols(), 0);
+    Matrix returnMatrix(rows(), cols(),(double)0);
     for (int i = 0; i < rows(); i++) {
         for (int j = 0; j < cols(); j++) {
-            returnMatrix[i][j] = mat[i][j] - rhs[i][j];
+            *returnMatrix(i, j) = mat[i][j] - *rhs(i, j);
         }
     }
     return returnMatrix;
@@ -53,9 +62,9 @@ Matrix Matrix::operator*(Matrix rhs)
         for (int j = 0; j < returnMatrix.cols(); j++) {
             double sum = 0;
             for (int k = 0; k < cols(); k++) {
-                sum += mat[i][k] * rhs[k][j];
+                sum += mat[i][k] * *rhs(k, j);
             }
-            returnMatrix[i][j] = sum;
+            *returnMatrix(i, j) = sum;
         }
     }
     return returnMatrix;
@@ -79,7 +88,7 @@ void Matrix::append(bool rowWise, Matrix& rhs)
         }
         for (int i = 0; i < rows(); i++) {
             for (int j = 0; j < rhs.cols(); j++) {
-                mat[i].push_back(rhs[i][j]);
+                mat[i].push_back(*rhs(i, j));
             }
         }
     }
@@ -88,7 +97,7 @@ void Matrix::append(bool rowWise, Matrix& rhs)
             throw MatrixSizeException();
         }
         for (int i = 0; i < rhs.rows(); i++) {
-            mat.push_back(rhs[i]);
+            mat.push_back(rhs.toVec()[i]);
         }
     }
 }

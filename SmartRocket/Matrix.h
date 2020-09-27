@@ -8,14 +8,20 @@ struct MatrixSizeException : public exception {
 	}
 };
 
+struct MatrixIndex {
+	int row;
+	int col;
+};
+
 class Matrix
 {
 private:
 	vector<vector<double>> mat;
 public:
 	Matrix(unsigned int rows, unsigned int cols, double val);
+	Matrix(unsigned int rows, unsigned int cols, double* vals);
 
-	vector<double> operator [](int row);
+	double* operator()(unsigned int row, unsigned int col);
 	Matrix operator +(Matrix rhs);
 	Matrix operator -(Matrix rhs);
 	Matrix operator *(Matrix rhs);
