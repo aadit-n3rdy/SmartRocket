@@ -14,6 +14,17 @@ Matrix::Matrix(unsigned int rows, unsigned int cols, double* vals) {
     }
 }
 
+Matrix::Matrix(unsigned int rows, unsigned int cols)
+{
+    srand(time(NULL));
+    mat = vector<vector<double>>(rows, vector<double>(cols));
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            mat[i][j] = rand();
+        }
+    }
+}
+
 double* Matrix::operator()(unsigned int row, unsigned int col)
 {
     if (row < rows() && col < cols()) {

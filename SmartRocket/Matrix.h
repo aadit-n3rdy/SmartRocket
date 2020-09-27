@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <cstdlib>
+#include <time.h>
 using namespace std;
 
 struct MatrixSizeException : public exception {
@@ -20,6 +22,7 @@ private:
 public:
 	Matrix(unsigned int rows, unsigned int cols, double val);
 	Matrix(unsigned int rows, unsigned int cols, double* vals);
+	Matrix(unsigned int rows, unsigned int cols);
 
 	double* operator()(unsigned int row, unsigned int col);
 	Matrix operator +(Matrix rhs);

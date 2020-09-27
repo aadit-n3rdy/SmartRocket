@@ -19,11 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Perceptron.h" />
+    <ClInclude Include="Rocket.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Perceptron.cpp" />
+    <ClCompile Include="Rocket.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
