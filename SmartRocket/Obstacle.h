@@ -1,14 +1,14 @@
 #pragma once
-#include "ofVec2f"
+#include "Vec2.h"
 class Obstacle {
 private:
-	ofVec2f pos;
+	Vec2 pos;
 	float radius;
 public:
-	ofVec2f getPos() {
+	Vec2 getPos() {
 		return pos;
 	}
-	void setPos(ofVec2f newPos) {
+	void setPos(Vec2 newPos) {
 		pos = newPos;
 	}
 
@@ -18,4 +18,4 @@ public:
 	void setRadius(float newradius) {
 		radius = newradius;
 	}
-}
+};

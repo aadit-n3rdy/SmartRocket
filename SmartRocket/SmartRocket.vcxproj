@@ -24,6 +24,8 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Perceptron.h" />
     <ClInclude Include="Rocket.h" />
+    <ClInclude Include="Target.h" />
+    <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Layer.cpp" />
@@ -32,6 +34,8 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Perceptron.cpp" />
     <ClCompile Include="Rocket.cpp" />
+    <ClCompile Include="Target.cpp" />
+    <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

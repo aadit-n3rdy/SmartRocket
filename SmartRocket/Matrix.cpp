@@ -25,6 +25,10 @@ Matrix::Matrix(unsigned int rows, unsigned int cols)
     }
 }
 
+Matrix::Matrix() {
+    
+}
+
 double* Matrix::operator()(unsigned int row, unsigned int col)
 {
     if (row < rows() && col < cols()) {

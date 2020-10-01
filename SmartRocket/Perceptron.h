@@ -13,6 +13,7 @@ private:
 
 public:
     Perceptron(vector<int> shp, double learningRate);
+    Perceptron();
     void setLayers(vector<Layer> parent);
     double getEta();
     void setEta(double e);

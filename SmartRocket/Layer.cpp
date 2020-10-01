@@ -11,7 +11,7 @@ double sigmoidPrime(double z)
 	return sigmoid(z) * (1 - sigmoid(z));
 }
 
-inline void Layer::biasAdjust() {
+void Layer::biasAdjust() {
 	double dw;
 	for (int i = 0; i < wt.rows(); i++) {
 		dw = *da(i, 0) * sigmoidPrime(*z(i, 0));
@@ -20,7 +20,7 @@ inline void Layer::biasAdjust() {
 	}
 }
 
-inline Layer::Layer(int inWoB, int outWoB, double eta) {
+Layer::Layer(int inWoB, int outWoB, double eta) {
 	inCount = inWoB;
 	outCount = outWoB;
 	wt = Matrix(outCount, inWoB + 1);
@@ -92,10 +92,10 @@ inline void Layer::calcDerivativeHidden(Layer nextLayer) {
 		throw BadInputException();
 	}
 	for (int i = 0; i < a.rows(); i++) {
-		da[i, 0] = 0;
+		*da(i, 0) = 0;
 		for (int j = 0; j < nextLayer.outCount; j++)
 		{
-			da[i, 0] += *nextLayer.wt(j, i) * sigmoidPrime(nextLayer.getZ(j)) * nextLayer.getDa(j);
+			*da(i, 0) += *nextLayer.wt(j, i) * sigmoidPrime(nextLayer.getZ(j)) * nextLayer.getDa(j);
 		}
 	}
 }

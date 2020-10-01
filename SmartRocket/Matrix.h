@@ -23,6 +23,7 @@ public:
 	Matrix(unsigned int rows, unsigned int cols, double val);
 	Matrix(unsigned int rows, unsigned int cols, double* vals);
 	Matrix(unsigned int rows, unsigned int cols);
+	Matrix();
 
 	double* operator()(unsigned int row, unsigned int col);
 	Matrix operator +(Matrix rhs);

@@ -10,6 +10,12 @@ inline Perceptron::Perceptron(vector<int> shp, double learningRate)
     }
 }
 
+inline Perceptron::Perceptron()
+{
+    eta = 0.5;
+    
+}
+
 inline void Perceptron::setLayers(vector<Layer> parent) {
     layers = parent;
 }
@@ -25,7 +31,7 @@ inline void Perceptron::calc(Matrix in)
     }
     layers[0].calc(in);
     for (int i = 1; i < layers.size(); i++) {
-        layers[i].calc(layers[i - 1]);
+        layers[i].calc(layers[i-1]);
     }
 }
 
@@ -40,7 +46,7 @@ inline void Perceptron::learn(Matrix in, Matrix expected)
     calc(in);
     layers.back().calcDerivativeFinal(expected);
     for (int i = 0; i < layers.size() - 1; i++) {
-        layers[i].calcDerivativeHidden(layers[i + 1]);
+        layers[i].calcDerivativeHidden(layers[i+1]);
     }
     layers[0].weightAdjust(in);
 }
