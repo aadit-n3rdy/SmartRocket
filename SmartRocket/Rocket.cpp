@@ -33,7 +33,7 @@ inline RocketState Rocket::getState() {
 }
 
 inline void Rocket::update(float deltaTime) {
-    Vec2 obsRel = obs.getPos().sub(pos);
+    Vec2 obsRel = obs.getPos()+ (pos*-1);
     Vec2 targetRel = target.getPos() + pos * -1;
     double input[] = { obsRel.x, obsRel.y, targetRel.x, targetRel.y, pos.x, pos.y, vel.x, vel.y };
     ptron.calc(Matrix(8, 1, (double*)input));

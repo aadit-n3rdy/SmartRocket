@@ -9,5 +9,6 @@ public:
 	Vec2 getPos();
 	double getRadius();
 	Target(double x, double y, double rad);
+	Target();
 };
 

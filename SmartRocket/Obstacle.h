@@ -5,17 +5,9 @@ private:
 	Vec2 pos;
 	float radius;
 public:
-	Vec2 getPos() {
-		return pos;
-	}
-	void setPos(Vec2 newPos) {
-		pos = newPos;
-	}
+	Vec2 getPos();
+	void setPos(Vec2 newPos);
 
-	float getRadius() {
-		return radius;
-	}
-	void setRadius(float newradius) {
-		radius = newradius;
-	}
+	float getRadius();
+	void setRadius(float newradius);
 };
