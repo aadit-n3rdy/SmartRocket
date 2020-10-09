@@ -23,19 +23,18 @@ private:
     double velFactor = 1.0;
     double forceFactor = 2000.0;
     double eta = 0.5;
-    Obstacle obs;
-    Target target;
+    Obstacle* obs;
+    Target* target;
 
 public:
-    Rocket(Vec2 position, Rocket parent, Obstacle obstacle, Target targetParam);
+    Rocket(Vec2 position, Rocket parent, Obstacle* obstacle, Target* targetParam);
 
-    Rocket(Vec2 position, Obstacle obstacle, Target targetParam);
+    Rocket(Vec2 position, Obstacle* obstacle, Target* targetParam);
 
     Vec2 getPosition();
 
     Perceptron getPtron();
 
     void update(float deltaTime);
-    void draw();
     inline RocketState getState();
 };

@@ -1,6 +1,6 @@
 #include "Rocket.h"
 
-inline Rocket::Rocket(Vec2 position, Rocket parent, Obstacle obstacle, Target targetParam) {
+inline Rocket::Rocket(Vec2 position, Rocket parent, Obstacle* obstacle, Target* targetParam) {
     pos = position;
     target = targetParam;
     ptron = Perceptron(std::vector<int>{8, 6, 6, 2}, parent.getPtron().getEta());
@@ -13,7 +13,7 @@ inline Rocket::Rocket(Vec2 position, Rocket parent, Obstacle obstacle, Target ta
     }
 }
 
-inline Rocket::Rocket(Vec2 position, Obstacle obstacle, Target targetParam) {
+inline Rocket::Rocket(Vec2 position, const Obstacle* obstacle, const Target* targetParam) {
     target = targetParam;
     pos = position;
     obs = obstacle;
@@ -33,8 +33,8 @@ inline RocketState Rocket::getState() {
 }
 
 inline void Rocket::update(float deltaTime) {
-    Vec2 obsRel = obs.getPos()+ (pos*-1);
-    Vec2 targetRel = target.getPos() + pos * -1;
+    Vec2 obsRel = obs->getPos()+ (pos*-1);
+    Vec2 targetRel = target->getPos() + pos * -1;
     double input[] = { obsRel.x, obsRel.y, targetRel.x, targetRel.y, pos.x, pos.y, vel.x, vel.y };
     ptron.calc(Matrix(8, 1, (double*)input));
     Vec2 accel = Vec2(ptron.getLayers()[ptron.getLayers().size() - 1].getZ(0)
@@ -43,29 +43,13 @@ inline void Rocket::update(float deltaTime) {
     vel = vel + (accel * deltaTime * velFactor);
     pos = pos + (vel * deltaTime);
 
-    if ((pos.dist(obs.getPos()) < obs.getRadius())) {
+    if ((pos.dist(obs->getPos()) < obs->getRadius())) {
         state = RocketState::DEAD;
     }
     //TODO check if rocket is out of bounds
-    else if (pos.dist(target.getPos()) < target.getRadius()) {
+    else if (pos.dist(target->getPos()) < target->getRadius()) {
         state = RocketState::DONE;
     }
-}
-
-inline void Rocket::draw() {
-    if (state == RocketState::ALIVE) {
-        //TODO set color blue
-
-    }
-    else if (state == RocketState::DONE) {
-        //TODO set color green
-
-    }
-    else {
-        //TODO set color red
-
-    }
-    //TODO draw circle
 }
 
 double randomAdjust(double inp)
